@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sideimg {
+    background-image: url('side.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.customButton {
+    background-color: #4443A6;
+    padding: 10px;
+    width: inherit;
+    color: #ffffff;
+    border-radius: 10px;
+    transition: all 1s;
+
+
+}
+
+.customButton:hover {
+    background-color: #4443A6;
+    transform: scale(1.01);
+    padding: 10px;
+    width: inherit;
+    color: #ffffff;
+    border-radius: 10px;
+
+}
+
+.customButton:focus {
+    transform: scale(0.15);
+
+}
