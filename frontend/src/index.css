@@ -8,6 +8,13 @@
     background-repeat: no-repeat;
 }
 
+.sideimg2 {
+    background-image: url('side2.png');
+
+    background-size: cover;
+    /* background-repeat: no-repeat;     */
+}
+
 .customButton {
     background-color: #4443A6;
     padding: 10px;
@@ -21,7 +28,7 @@
 
 .customButton:hover {
     background-color: #4443A6;
-    transform: scale(1.01);
+    transform: scale(1.11);
     padding: 10px;
     width: inherit;
     color: #ffffff;
@@ -29,7 +36,11 @@
 
 }
 
-.customButton:focus {
-    transform: scale(0.15);
+.customButton:focus-visible {
+    transform: scale(0.8);
 
+}
+
+.shadowed {
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }
