@@ -12,7 +12,20 @@
     background-image: url('side2.png');
 
     background-size: cover;
+    background-position: center;
     /* background-repeat: no-repeat;     */
+}
+
+.customButton2 {
+    background-color: transparent;
+    border: 1px solid #4443A6;
+    padding: 10px;
+    width: inherit;
+    color: #4443A6;
+    ;
+    border-radius: 3px;
+    transition: all 1s;
+    font-weight: bolder;
 }
 
 .customButton {
@@ -20,7 +33,7 @@
     padding: 10px;
     width: inherit;
     color: #ffffff;
-    border-radius: 10px;
+    border-radius: 5px;
     transition: all 1s;
 
 
@@ -33,6 +46,15 @@
     width: inherit;
     color: #ffffff;
     border-radius: 10px;
+
+}
+
+.customButton2:hover {
+    background-color: #4443A6;
+    padding: 10px;
+    width: inherit;
+    color: #ffffff;
+    border-radius: 3px;
 
 }
 
