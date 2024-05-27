@@ -19,8 +19,26 @@ app.get('/', (req, res) => {
     res.send("server on");
 });
 
+const emailToSocketIdMap = new Map();
+const socketidToEmailMap = new Map();
+
+
 io.on('connection', (socket) => {
     console.log('a user connected');
+    socket.on("room:join", data => {
+        // console.log(data)
+        const { email, roomCode } = data;
+        emailToSocketIdMap.set(email, socket.id);
+        socketidToEmailMap.set(socket.id, email);
+
+        emailToSocketIdMap.set(email, socket.id);
+        socketidToEmailMap.set(socket.id, email);
+
+        io.to(roomCode).emit("user:joined", { email, id: socket.id });
+        socket.join(roomCode)
+        io.to(socket.id).emit("room:join", data);
+    });
+
 });
 
 server.listen(port, () => {

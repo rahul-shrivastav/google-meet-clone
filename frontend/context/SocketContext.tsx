@@ -8,8 +8,8 @@ export const useSocket = () => {
     return socket;
 };
 
-export const SocketProvider = (props) => {
-    const socket = useMemo(() => io("http://localhost:5000"), []);
+export const SocketProvider = (props: any) => {
+    const socket: any = useMemo(() => io("http://localhost:5000"), []);
 
     return (
         <SocketContext.Provider value={socket}>

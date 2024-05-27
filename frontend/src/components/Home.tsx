@@ -1,13 +1,22 @@
 import { useState } from 'react'
+import { useUser } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
     const [fullName, setFullName] = useState('');
     const [emailId, setEmailID] = useState('');
+    const { name, email, setName, setEmail } = useUser();
+    const navigate = useNavigate();
+
 
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(emailId, fullName)
+        setName(fullName)
+        setEmail(emailId)
+
+        console.log({ name, email })
+        navigate('/lobby')
 
     }
     return (

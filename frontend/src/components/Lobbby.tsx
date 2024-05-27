@@ -1,14 +1,36 @@
-import { useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { MdKeyboard } from "react-icons/md";
+import { useSocket } from '../../context/SocketContext';
+import { useUser } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
+
 
 const Lobbby = () => {
-    const [roomCode, setRoomCode] = useState('');
+    const [roomCode, setRoomCode] = useState('123');
+    const socket: any = useSocket();
+    const { name, email } = useUser();
+    const navigate = useNavigate()
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const handleSubmit = useCallback((event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(roomCode)
+        socket.emit("room:join", { roomCode, name, email })
 
-    }
+    }, [socket, roomCode, email])
+
+    const handleJoinRoom = useCallback((data: any) => {
+        const { email, roomCode } = data;
+        console.log(email, roomCode);
+        navigate(`/room/${roomCode}`);
+    }, [navigate]);
+
+    useEffect(() => {
+        socket.on("room:join", handleJoinRoom);
+        return () => {
+            socket.off("room:join", handleJoinRoom);
+        };
+    }, [socket, handleJoinRoom]);
+
     return (
         <div className='w-screen h-screen flex text-black  items-center justify-center   '>
             <div className=' flex flex-col items-start justify-center h-3/5  w-11/12  sm:w-4/12 xl:w-3/6 border p-5 shadowed  '>
@@ -19,9 +41,9 @@ const Lobbby = () => {
                     <label className="border border-purple-800 mx-4 input input-bordered flex items-center gap-2 bg-white">
                         <MdKeyboard className='text-3xl  text-blue-900' />
 
-                        <input type="text" className="grow bg-white" placeholder="Enter Code" value={roomCode} onChange={(e) => setRoomCode(e.target.value)} />
+                        <input type="text" className="grow bg-white" placeholder="Enter Room Code" value={roomCode} onChange={(e) => setRoomCode(e.target.value)} />
                     </label>
-                    <button className="customButton2 w-full" type='submit'>Enter Lobby</button>
+                    <button className="customButton2 w-full" type='submit'>Enter Room</button>
                 </form>
             </div >
             <div className='w-0   sm:w-3/12 xl:w-3/12  rounded-r-xl' >
